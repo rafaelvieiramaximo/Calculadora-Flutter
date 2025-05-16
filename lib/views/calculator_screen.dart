@@ -64,6 +64,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       final expression = parser.parse(display.replaceAll('x', '*'));
       ContextModel cm = ContextModel();
       double eval = expression.evaluate(EvaluationType.REAL, cm);
+      if (eval == double.infinity) {
+        mostrarErro('Divisão por zero');
+        return;
+      }
       setState(() {
         history = display;
         display = eval.toStringAsFixed(2);
@@ -77,7 +81,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(mensagem),
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 5),
         backgroundColor: Colors.red,
       ),
     );
@@ -160,13 +164,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 button('0', onPressed: () => addToDisplay('0')),
                 button('+', onPressed: () => addToDisplay('+')),
                 button('C', colorText: Colors.red, onPressed: clearDisplay),
+                button('()', onPressed: insertParentheses),
+                button('%', onPressed: applyPorcentage),
                 button(
                   '=',
                   colorText: Colors.green,
                   onPressed: calculateResult,
                 ),
-                button('()', onPressed: insertParentheses),
-                button('%', onPressed: applyPorcentage),
               ],
             ),
           ),

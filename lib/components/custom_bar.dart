@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_calculadora/styles/style.dart';
+import 'package:app_calculadora/main.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? nextPage;
@@ -19,6 +20,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
         },
       ),
+      actions: [
+        // Replace this with your actual theme notifier logic
+        IconButton(
+          icon: Icon(
+            themeNotifier.value == ThemeMode.light
+                ? Icons.dark_mode
+                : Icons.light_mode,
+          ),
+          onPressed: () {
+            themeNotifier.value =
+                themeNotifier.value == ThemeMode.light
+                    ? ThemeMode.dark
+                    : ThemeMode.light;
+          },
+        ),
+      ],
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

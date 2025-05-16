@@ -1,7 +1,6 @@
 import 'package:app_calculadora/components/custom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'package:app_calculadora/main.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
@@ -59,17 +58,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     });
   }
 
-  void calculateResult(){
-    try{
+  void calculateResult() {
+    try {
       final parser = ShuntingYardParser();
       final expression = parser.parse(display.replaceAll('x', '*'));
       ContextModel cm = ContextModel();
       double eval = expression.evaluate(EvaluationType.REAL, cm);
-      setState((){
+      setState(() {
         history = display;
         display = eval.toStringAsFixed(2);
-      })
-    }catch (e){
+      });
+    } catch (e) {
       mostrarErro('Erro ao calcular');
     }
   }
@@ -84,16 +83,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 
-  Widget button(String text, {Color? colorText, required VoidCallback onPressed}){
+  Widget button(
+    String text, {
+    Color? colorText,
+    required VoidCallback onPressed,
+  }) {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        foregroundColor: colorText ?? Theme.of(context).textTheme.bodyLarge!.color,
+        foregroundColor:
+            colorText ?? Theme.of(context).textTheme.bodyLarge!.color,
         textStyle: const TextStyle(fontSize: 24),
       ),
       child: Text(text),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: const CustomAppBar(), body: Stack());

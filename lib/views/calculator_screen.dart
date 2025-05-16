@@ -53,8 +53,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void insertParentheses() {
     setState(() {
       if (display == '0') display = '';
-      display += abreParentese ? '(' : ')';
-      abreParentese = !abreParentese;
+
+      int open = '('.allMatches(display).length;
+      int close = ')'.allMatches(display).length;
+
+      if (RegExp(r'[0-9)]$').hasMatch(display)) {
+        if (open > close) {
+          display += ')';
+        }
+      } else {
+        display += '(';
+      }
     });
   }
 

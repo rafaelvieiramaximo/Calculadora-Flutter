@@ -27,8 +27,26 @@ class AppTextStyles {
       Shadow(color: CalcColors.shadow, offset: Offset(2, 2), blurRadius: 10),
     ],
   );
+}
 
-  class AppThemes{
-    
-  }
+class AppThemes {
+  static final light = ThemeData(
+    primarySwatch: Colors.blueGrey,
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: Colors.white,
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+      bodyLarge: TextStyle(fontSize: 20),
+    ),
+  );
+
+  static final dark = ThemeData(
+    primarySwatch: Colors.blueGrey,
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: Colors.black,
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+      bodyLarge: TextStyle(fontSize: 20),
+    ),
+  );
 }

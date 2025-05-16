@@ -101,6 +101,75 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: const CustomAppBar(), body: Stack());
+    return Scaffold(
+      appBar: const CustomAppBar(),
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
+            color: Colors.indigo,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  display,
+                  style: const TextStyle(fontSize: 48, color: Colors.amber),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  history,
+                  style: const TextStyle(fontSize: 18, color: Colors.yellow),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "History",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(history, style: const TextStyle(fontSize: 14)),
+              ],
+            ),
+          ),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 4,
+              padding: const EdgeInsets.all(16),
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              children: [
+                button('7', onPressed: () => addToDisplay('7')),
+                button('8', onPressed: () => addToDisplay('8')),
+                button('9', onPressed: () => addToDisplay('9')),
+                button('/', onPressed: () => addToDisplay('/')),
+                button('4', onPressed: () => addToDisplay('4')),
+                button('5', onPressed: () => addToDisplay('5')),
+                button('6', onPressed: () => addToDisplay('6')),
+                button('*', onPressed: () => addToDisplay('*')),
+                button('1', onPressed: () => addToDisplay('1')),
+                button('2', onPressed: () => addToDisplay('2')),
+                button('3', onPressed: () => addToDisplay('3')),
+                button('-', onPressed: () => addToDisplay('-')),
+                button('.', onPressed: () => addToDisplay('.')),
+                button('0', onPressed: () => addToDisplay('0')),
+                button('+', onPressed: () => addToDisplay('+')),
+                button('C', colorText: Colors.red, onPressed: clearDisplay),
+                button(
+                  '=',
+                  colorText: Colors.green,
+                  onPressed: calculateResult,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
